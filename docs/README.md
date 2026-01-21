@@ -14,9 +14,21 @@ Es un programa de CLI para administrar proyectos de forma facil y rapida desde l
     ````
     git clone https://github.com/0plimplim0/projectManager-CLI
     ```
-3. Ejecutar:
+3. Crear un entorno virtual:
+    ````
+    python -m venv .venv
     ```
-    python ./main.py -h
+4. Activar el entorno virtual:
+    ```
+    Linux: source .venv/bin/activate | Windows: .venv/Scripts/Activate.ps1
+    ```
+5. Instalar paquetes:
+    ```
+    pip install -r requirements.txt
+    ```
+6. Ejecutar:
+    ```
+    python ./cli.py -h
     ```
 
 ## Features básicas
