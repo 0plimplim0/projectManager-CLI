@@ -1,15 +1,15 @@
 create table if not exists projects(
-    id int primary key autoincrement,
+    id integer primary key autoincrement,
     title text not null,
-    status text check(status in ('ongoing', 'completed', 'inactive'))
+    status text check(status in ('ongoing', 'completed', 'inactive')) default 'ongoing'
 );
 
 create table if not exists tasks(
-    id int primary key autoincrement,
+    id integer primary key autoincrement,
     project_id int,
     title text not null,
     status text check(status in ('pending', 'done')) default 'pending',
-    foreign key(project_id) references projects(id)
+    foreign key(project_id) references projects(id) on delete cascade
 );
 
 create table if not exists app_state(
