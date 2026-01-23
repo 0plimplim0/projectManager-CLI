@@ -1,0 +1,1 @@
+insert into app_state(state_key, state_value) values('active_project_id', '0');
