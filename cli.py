@@ -1,26 +1,44 @@
-from typing import Annotated, Any
+from typing import Annotated
 from controllers import project, task
-from utils import utils
 import typer
 
 app = typer.Typer()
 
 @app.command()
-def main(object: str, action: Annotated[str, typer.Argument()] = 'list', data=typer.Argument(default=None)):
-    objects = ['proj', 'task']
-    actions = ['create', 'add', 'list', 'select', 'done']
+def proj(action: str,
+         proj_name: Annotated[str, typer.Option(help='Nombre del proyecto')],
+         proj_id: Annotated[int, typer.Option(help='ID del proyecto')]
+):
+    '''
+    Ejecuta una accion con el objeto "Proyecto".
+    '''
+    actions = ['create', 'list', 'select']
     if action not in actions:
-        action = 'list'
-    if object not in objects:
-        print(f'Objeto inválido: {object}')
-        raise typer.Abort()
-    match object:
-        case 'proj':
-            project.getData(action, data)
-        case 'task':
-            print(f'Objeto válido: {object}')
+        print('Accion inválida.')
+        raise typer.Exit()
+    data = {
+        'action': action,
+        'name': proj_name,
+        'id': proj_id
+    }
+    project.getData(data)
+
+@app.command()
+def task(action: str,
+         task_name: Annotated[str, typer.Option(help='Nombre de la tarea.')]
+):
+    '''
+    Realiza una accion con el objeto "Tarea".
+    '''
+    actions = ['add', 'list']
+    if action not in actions:
+        print('Accion inválida.')
+        raise typer.Exit()
+    data = {
+        'action': action,
+        'name': task_name
+    }
+    task.getData(data)
 
 if __name__ == '__main__':
-    # ToDo: Agregar mensaje en info.log con el status de la iniciacion
-    utils.initDb()
     app()

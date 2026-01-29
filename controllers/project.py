@@ -1,11 +1,5 @@
-def getData(action, data):
-    match action:
-        case 'create':
-            createProject()
-        case 'select':
-            pass
-        case 'list':
-            pass
+def getData(data):
+    pass
 
 def createProject():
     pass
