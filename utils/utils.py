@@ -16,6 +16,10 @@ def initDb():
 
 def get_active_project_id():
     with sqlite3.connect('./data/database.sqlite') as conn:
-        active_id = conn.execute('select state_value from app_state where key = ?', ('active_project_id',)).fetchone()
+        active_id = conn.execute('select state_value from app_state where state_key = ?', ('active_project_id',)).fetchone()
         active_id = int(active_id[0])
         return active_id
+    
+def get_conn():
+    connection = sqlite3.connect('./data/database.sqlite')
+    return connection
