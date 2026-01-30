@@ -1,5 +1,5 @@
 from typing import Annotated
-from controllers import project, task
+from controllers import project, taskO
 from utils import utils
 import typer
 
@@ -40,7 +40,7 @@ def task(action: str,
         'name': task_name,
         'id': task_id
     }
-    task.getData(data)
+    taskO.getData(data)
 
 if __name__ == '__main__':
     utils.initDb()
