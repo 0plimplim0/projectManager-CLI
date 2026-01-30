@@ -22,13 +22,15 @@ def addTask(proj_id, name):
 def listTasks(proj_id):
     conn = utils.get_conn()
     cursor = conn.cursor()
-    cursor.execute('select * from tasks where project_id = ?', (proj_id,))
+    cursor.execute('select * from tasks where project_id = ? order by status desc', (proj_id,))
     tasks = cursor.fetchall()
     if not tasks:
         print('This project has no tasks.')
         return
+    index = 1
     for task in tasks:
-        print(f'{task[0]} - {task[2]} ({task[3]})')
+        print(f'{index} id({task[0]}) - {task[2]} ({task[3]})')
+        index += 1
 
 def doneTask(id):
     conn = utils.get_conn()
